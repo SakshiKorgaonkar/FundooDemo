@@ -12,5 +12,10 @@ namespace BusinessLayer.Interface
     public interface IUserBl
     {
         public UserEntity RegisterUser(UserMl userMl);
+
+        public UserEntity LoginUser(LoginMl loginMl);
+        public List<UserEntity> GetUsers();
+
+        public UserEntity DeleteUser(int id);
     }
 }

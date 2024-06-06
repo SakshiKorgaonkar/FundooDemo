@@ -17,7 +17,7 @@ namespace FundooDemo.Controllers
         {
             this.userBl = userBl;
         }
-        [HttpPost]
+        [HttpPost("register")]
         public IActionResult RegisterUser(UserMl userMl)
         {
             try
@@ -44,6 +44,93 @@ namespace FundooDemo.Controllers
                     Data = null
                 };
                 return StatusCode(500,result);
+            }
+        }
+        [HttpPost("login")]
+        public IActionResult LoginUser(LoginMl loginMl)
+        {
+            try
+            {
+                var result = userBl.LoginUser(loginMl);
+                return Ok(result);
+            }
+            catch (CustomException1 ex)
+            {
+                var result = new DTO
+                {
+                    Status = false,
+                    Message = ex.Message,
+                    Data = null
+                };
+                return BadRequest(result);
+            }
+            catch (Exception ex)
+            {
+                var result = new DTO
+                {
+                    Status = false,
+                    Message = ex.Message,
+                    Data = null
+                };
+                return StatusCode(500, result);
+            }
+        }
+        [HttpGet]
+        public IActionResult GetUsers()
+        {
+            try
+            {
+                var result = userBl.GetUsers();
+                return Ok(result);
+            }
+            catch (CustomException1 ex)
+            {
+                var result = new DTO
+                {
+                    Status = false,
+                    Message = ex.Message,
+                    Data = null
+                };
+                return BadRequest(result);
+            }
+            catch (Exception ex)
+            {
+                var result = new DTO
+                {
+                    Status = false,
+                    Message = ex.Message,
+                    Data = null
+                };
+                return StatusCode(500, result);
+            }
+        }
+        [HttpDelete]
+        public IActionResult DeleteUser(int id)
+        {
+            try
+            {
+                var result = userBl.DeleteUser(id);
+                return Ok(result);
+            }
+            catch (CustomException1 ex)
+            {
+                var result = new DTO
+                {
+                    Status = false,
+                    Message = ex.Message,
+                    Data = null
+                };
+                return BadRequest(result);
+            }
+            catch (Exception ex)
+            {
+                var result = new DTO
+                {
+                    Status = false,
+                    Message = ex.Message,
+                    Data = null
+                };
+                return StatusCode(500, result);
             }
         }
     }

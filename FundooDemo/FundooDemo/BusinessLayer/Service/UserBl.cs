@@ -29,5 +29,38 @@ namespace BusinessLayer.Service
                 throw;
             }
         } 
+        public UserEntity LoginUser(LoginMl loginMl)
+        {
+            try
+            {
+                return userRl.LoginUser(loginMl);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public List<UserEntity> GetUsers()
+        {
+            try
+            {
+                return userRl.GetUsers();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public UserEntity DeleteUser(int id)
+        {
+            try
+            {
+                return userRl.DeleteUser(id);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
