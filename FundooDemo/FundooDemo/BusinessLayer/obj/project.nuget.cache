@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "mBORpNwVfddJtEM/Ap0BF89Kxi16ZN5xdkImz9v7NOpmBd0WyIGUI5O3HSCkRFfdwaH1gNgKDbgDCcv9QP9/ng==",
+  "dgSpecHash": "Z8QCe2jJYPDT6keDd5Sj/NQ/4GIVo6JZesLT32zVpF4+S5U7zevHIr750OeheMNmFq6t1B53oTBeLJfvlZfTwA==",
   "success": true,
   "projectFilePath": "C:\\Users\\DELL\\OneDrive - HERE Global B.V\\Desktop\\CDAC\\BridgeLabz_Assignment1\\Fundoo\\FundooDemo\\FundooDemo\\BusinessLayer\\BusinessLayer.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\DELL\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.0\\microsoft.aspnetcore.cryptography.internal.6.0.0.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.0\\microsoft.aspnetcore.cryptography.keyderivation.6.0.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",

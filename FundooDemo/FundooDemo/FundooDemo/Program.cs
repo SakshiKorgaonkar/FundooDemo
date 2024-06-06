@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using RepoLayer.Context;
 using RepoLayer.Interface;
 using RepoLayer.Service;
+using RepoLayer.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUserRl, UserRl>();
 builder.Services.AddScoped<IUserBl, UserBl>();
+builder.Services.AddScoped<PasswordHashing>();
 builder.Services.AddDbContext<ProjectContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));

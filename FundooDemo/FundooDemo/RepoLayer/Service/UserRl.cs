@@ -4,6 +4,7 @@ using RepoLayer.Context;
 using RepoLayer.CustomException;
 using RepoLayer.Entity;
 using RepoLayer.Interface;
+using RepoLayer.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,11 @@ namespace RepoLayer.Service
     public class UserRl:IUserRl
     {
         private readonly ProjectContext projectContext;
-        public UserRl(ProjectContext projectContext)
+        private readonly PasswordHashing passwordHashing;
+        public UserRl(ProjectContext projectContext, PasswordHashing passwordHashing)
         {
             this.projectContext = projectContext;
+            this.passwordHashing = passwordHashing;
         }
         public UserEntity RegisterUser(UserMl userMl)
         {
@@ -31,7 +34,8 @@ namespace RepoLayer.Service
                 UserEntity userEntity = new UserEntity();
                 userEntity.Name = userMl.Name;
                 userEntity.Email = userMl.Email;
-                userEntity.Password = userMl.Password;
+                var hashedPassword=passwordHashing.Hasher(userMl.Password);
+                userEntity.Password = hashedPassword;
                 userEntity.PhoneNumber = userMl.PhoneNumber;
                 projectContext.Users.Add(userEntity);
                 projectContext.SaveChanges();
@@ -51,7 +55,7 @@ namespace RepoLayer.Service
             }
             try
             {
-                if (result.Password == loginMl.Password)
+                if (passwordHashing.VerifyPassword(result.Password)==loginMl.Password)
                 {
                     return result;
                 }
