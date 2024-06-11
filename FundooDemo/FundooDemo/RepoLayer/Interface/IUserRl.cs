@@ -12,7 +12,7 @@ namespace RepoLayer.Interface
     {
         public UserEntity RegisterUser(UserMl userMl);
 
-        public UserEntity LoginUser(LoginMl loginMl);
+        public string LoginUser(LoginMl loginMl);
 
         public List<UserEntity> GetUsers();
 

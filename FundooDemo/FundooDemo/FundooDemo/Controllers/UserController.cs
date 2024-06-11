@@ -1,9 +1,8 @@
 ﻿using BusinessLayer.Interface;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ModelLayer;
 using RepoLayer.CustomException;
-using RepoLayer.Entity;
 
 namespace FundooDemo.Controllers
 {
@@ -76,6 +75,7 @@ namespace FundooDemo.Controllers
             }
         }
         [HttpGet]
+        [Authorize]
         public IActionResult GetUsers()
         {
             try
@@ -105,6 +105,7 @@ namespace FundooDemo.Controllers
             }
         }
         [HttpDelete]
+        [Authorize]
         public IActionResult DeleteUser(int id)
         {
             try

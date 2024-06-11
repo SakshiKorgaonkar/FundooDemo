@@ -1,26 +1,27 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using ModelLayer;
 using RepoLayer.Context;
 using RepoLayer.CustomException;
 using RepoLayer.Entity;
 using RepoLayer.Interface;
 using RepoLayer.Utility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RepoLayer.Service
 {
     public class UserRl:IUserRl
     {
         private readonly ProjectContext projectContext;
+        private readonly IConfiguration configuration;
         private readonly PasswordHashing passwordHashing;
-        public UserRl(ProjectContext projectContext, PasswordHashing passwordHashing)
+        public UserRl(ProjectContext projectContext, PasswordHashing passwordHashing,IConfiguration configuration)
         {
             this.projectContext = projectContext;
             this.passwordHashing = passwordHashing;
+            this.configuration = configuration;
         }
         public UserEntity RegisterUser(UserMl userMl)
         {
@@ -34,8 +35,7 @@ namespace RepoLayer.Service
                 UserEntity userEntity = new UserEntity();
                 userEntity.Name = userMl.Name;
                 userEntity.Email = userMl.Email;
-                var hashedPassword=passwordHashing.Hasher(userMl.Password);
-                userEntity.Password = hashedPassword;
+                userEntity.Password = passwordHashing.Hasher(userMl.Password);
                 userEntity.PhoneNumber = userMl.PhoneNumber;
                 projectContext.Users.Add(userEntity);
                 projectContext.SaveChanges();
@@ -46,7 +46,7 @@ namespace RepoLayer.Service
                 throw new Exception("Something went wrong");
             }
         }
-        public UserEntity LoginUser(LoginMl loginMl)
+        public string LoginUser(LoginMl loginMl)
         {
             var result=projectContext.Users.FirstOrDefault(u=>u.Email== loginMl.Email);
             if(result == null)
@@ -55,9 +55,28 @@ namespace RepoLayer.Service
             }
             try
             {
-                if (passwordHashing.VerifyPassword(result.Password)==loginMl.Password)
+                bool isPasswordValid = passwordHashing.VerifyPassword(loginMl.Password,result.Password);
+                if (isPasswordValid)
                 {
-                    return result;
+                    var claims = new[]
+                    {
+                        new Claim(JwtRegisteredClaimNames.Sub,configuration["JWT:Subject"]),
+                        new Claim("Id",result.Id.ToString()),
+                        new Claim("Username", result.Name),
+                        new Claim("Email",result.Email),
+                        new Claim("Phone",result.PhoneNumber.ToString())
+                    };
+                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]));
+                    var signin=new SigningCredentials(key,SecurityAlgorithms.HmacSha256);
+                    var token=new JwtSecurityToken(
+                        issuer:configuration["JWT:Issuer"],
+                        audience:configuration["JWT:Audience"],
+                        claims:claims,
+                        expires:DateTime.UtcNow.AddMinutes(10),
+                        signingCredentials:signin);
+
+                    var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+                    return jwtToken;
                 }
                 else
                 {
@@ -66,28 +85,25 @@ namespace RepoLayer.Service
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 throw new Exception("Something went wrong");
             }
         }
         public List<UserEntity> GetUsers()
         {
             List<UserEntity> userEntities=projectContext.Users.ToList();
-            if (userEntities == null)
+            if (userEntities == null || userEntities.Count==0)
             {
                 throw new CustomException1("No users registered");
             }
             try
             {
-                if (userEntities!=null)
-                {
-                    return userEntities;
-                }
+                return userEntities; 
             }
             catch (Exception ex)
             {
                 throw new Exception("Something went wrong");
             }
-            return userEntities;
         }
         public UserEntity DeleteUser(int id)
         {
@@ -100,12 +116,12 @@ namespace RepoLayer.Service
             {
                 projectContext.Users.Remove(userToRemove);
                 projectContext.SaveChanges();
+                return userToRemove;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Something went wrong");
             }
-            return userToRemove;
         }
     }
 }

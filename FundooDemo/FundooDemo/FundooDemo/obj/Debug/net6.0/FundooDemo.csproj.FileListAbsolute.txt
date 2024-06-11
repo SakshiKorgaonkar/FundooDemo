@@ -70,3 +70,6 @@ C:\Users\DELL\OneDrive - HERE Global B.V\Desktop\CDAC\BridgeLabz_Assignment1\Fun
 C:\Users\DELL\OneDrive - HERE Global B.V\Desktop\CDAC\BridgeLabz_Assignment1\Fundoo\FundooDemo\FundooDemo\FundooDemo\obj\Debug\net6.0\FundooDemo.pdb
 C:\Users\DELL\OneDrive - HERE Global B.V\Desktop\CDAC\BridgeLabz_Assignment1\Fundoo\FundooDemo\FundooDemo\FundooDemo\obj\Debug\net6.0\FundooDemo.genruntimeconfig.cache
 C:\Users\DELL\OneDrive - HERE Global B.V\Desktop\CDAC\BridgeLabz_Assignment1\Fundoo\FundooDemo\FundooDemo\FundooDemo\obj\Debug\net6.0\ref\FundooDemo.dll
+C:\Users\DELL\OneDrive - HERE Global B.V\Desktop\CDAC\BridgeLabz_Assignment1\Fundoo\FundooDemo\FundooDemo\FundooDemo\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\DELL\OneDrive - HERE Global B.V\Desktop\CDAC\BridgeLabz_Assignment1\Fundoo\FundooDemo\FundooDemo\FundooDemo\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\DELL\OneDrive - HERE Global B.V\Desktop\CDAC\BridgeLabz_Assignment1\Fundoo\FundooDemo\FundooDemo\FundooDemo\bin\Debug\net6.0\BCrypt.Net-Next.dll
