@@ -58,7 +58,7 @@ namespace RepoLayer.Service
                 bool isPasswordValid = passwordHashing.VerifyPassword(loginMl.Password,result.Password);
                 if (isPasswordValid)
                 {
-                    var claims = new[]
+                    var claims = new Claim[]
                     {
                         new Claim(JwtRegisteredClaimNames.Sub,configuration["JWT:Subject"]),
                         new Claim("Id",result.Id.ToString()),

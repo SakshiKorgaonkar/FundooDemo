@@ -15,6 +15,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserRl, UserRl>();
 builder.Services.AddScoped<IUserBl, UserBl>();
 builder.Services.AddScoped<PasswordHashing>();
+builder.Services.AddScoped<INoteRI, NoteRI>();
+builder.Services.AddScoped<INoteBI, NoteBI>();
 builder.Services.AddControllers();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
