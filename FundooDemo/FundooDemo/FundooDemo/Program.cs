@@ -11,10 +11,12 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddScoped<IUserRl, UserRl>();
 builder.Services.AddScoped<IUserBl, UserBl>();
 builder.Services.AddScoped<PasswordHashing>();
+builder.Services.AddScoped<TokenGenerator>();
+builder.Services.AddScoped<INoteRI, NoteRI>();
+builder.Services.AddScoped<INoteBI, NoteBI>();
 builder.Services.AddControllers();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

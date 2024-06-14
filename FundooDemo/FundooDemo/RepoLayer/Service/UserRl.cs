@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using MimeKit;
 using ModelLayer;
 using RepoLayer.Context;
 using RepoLayer.CustomException;
@@ -15,13 +16,13 @@ namespace RepoLayer.Service
     public class UserRl:IUserRl
     {
         private readonly ProjectContext projectContext;
-        private readonly IConfiguration configuration;
         private readonly PasswordHashing passwordHashing;
-        public UserRl(ProjectContext projectContext, PasswordHashing passwordHashing,IConfiguration configuration)
+        private readonly TokenGenerator tokenGenerator;
+        public UserRl(ProjectContext projectContext, PasswordHashing passwordHashing, TokenGenerator tokenGenerator)
         {
             this.projectContext = projectContext;
             this.passwordHashing = passwordHashing;
-            this.configuration = configuration;
+            this.tokenGenerator = tokenGenerator;
         }
         public UserEntity RegisterUser(UserMl userMl)
         {
@@ -58,25 +59,7 @@ namespace RepoLayer.Service
                 bool isPasswordValid = passwordHashing.VerifyPassword(loginMl.Password,result.Password);
                 if (isPasswordValid)
                 {
-                    var claims = new[]
-                    {
-                        new Claim(JwtRegisteredClaimNames.Sub,configuration["JWT:Subject"]),
-                        new Claim("Id",result.Id.ToString()),
-                        new Claim("Username", result.Name),
-                        new Claim("Email",result.Email),
-                        new Claim("Phone",result.PhoneNumber.ToString())
-                    };
-                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]));
-                    var signin=new SigningCredentials(key,SecurityAlgorithms.HmacSha256);
-                    var token=new JwtSecurityToken(
-                        issuer:configuration["JWT:Issuer"],
-                        audience:configuration["JWT:Audience"],
-                        claims:claims,
-                        expires:DateTime.UtcNow.AddMinutes(10),
-                        signingCredentials:signin);
-
-                    var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
-                    return jwtToken;
+                    return tokenGenerator.GenerateToken(result);
                 }
                 else
                 {
@@ -107,8 +90,8 @@ namespace RepoLayer.Service
         }
         public UserEntity DeleteUser(int id)
         {
-            UserEntity userToRemove=projectContext.Users.FirstOrDefault(u => u.Id == id);
-            if(userToRemove == null)
+            UserEntity userToRemove = projectContext.Users.FirstOrDefault(u => u.Id == id);
+            if (userToRemove == null)
             {
                 throw new CustomException1("No such user exists");
             }
@@ -122,6 +105,29 @@ namespace RepoLayer.Service
             {
                 throw new Exception("Something went wrong");
             }
+        }
+        public UserEntity ResetPassword(string email,string newPassword)
+        {
+            var user= projectContext.Users.FirstOrDefault(x=>x.Email== email);
+            user.Password = passwordHashing.Hasher(newPassword);
+            projectContext.Users.Update(user);
+            projectContext.SaveChanges();
+            return user;
+        }
+        public UserEntity UpdateUser(int id,UserMl user)
+        {
+            var userToUpdate=projectContext.Users.FirstOrDefault(y => y.Id == id);
+            if(userToUpdate == null)
+            {
+                throw new CustomException1("User doesn't exist");
+            }
+            userToUpdate.Email= user.Email;
+            userToUpdate.Password= user.Password;
+            userToUpdate.Name= user.Name;
+            userToUpdate.PhoneNumber= user.PhoneNumber;
+            projectContext.Users.Update(userToUpdate);
+            projectContext.SaveChanges();
+            return userToUpdate;
         }
     }
 }

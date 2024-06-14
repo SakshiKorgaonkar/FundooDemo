@@ -16,7 +16,7 @@ namespace RepoLayer.Entity
         [Required]
         public string Name { get; set; }
         [Required]
-        public long PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         [Required]
         public string Email { get; set; }
         [Required]

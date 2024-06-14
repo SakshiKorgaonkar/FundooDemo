@@ -13,5 +13,9 @@ namespace RepoLayer.Context
         public ProjectContext(DbContextOptions options) : base(options) { }
 
         public DbSet<UserEntity> Users { get; set; }
+
+        public DbSet<Note> Notes { get; set; }
+
+        public DbSet<Label> Labels { get; set; }
     }
 }

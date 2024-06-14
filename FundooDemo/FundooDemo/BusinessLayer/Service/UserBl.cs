@@ -62,5 +62,27 @@ namespace BusinessLayer.Service
                 throw;
             }
         }
+        public UserEntity ResetPassword(string email,string newPassword)
+        {
+            try
+            {
+                return userRl.ResetPassword(email, newPassword);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public UserEntity UpdateUser(int id,UserMl userMl)
+        {
+            try
+            {
+                return userRl.UpdateUser(id, userMl);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
