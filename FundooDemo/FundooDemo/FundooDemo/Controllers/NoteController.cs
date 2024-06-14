@@ -18,7 +18,6 @@ namespace FundooDemo.Controllers
             this.noteBI = noteBI;
         }
         [HttpPost]
-        [Authorize]
         public IActionResult AddNote(NoteMI note)
         {
             try
@@ -48,7 +47,6 @@ namespace FundooDemo.Controllers
             }
         }
         [HttpDelete]
-        [Authorize]
         public IActionResult RemoveNote(int id)
         {
             try
@@ -107,7 +105,6 @@ namespace FundooDemo.Controllers
             }
         }
         [HttpGet("byId")]
-        [Authorize]
         public IActionResult GetNoteById(int id)
         {
             try
@@ -137,12 +134,69 @@ namespace FundooDemo.Controllers
             }
         }
         [HttpPut]
-        [Authorize]
         public IActionResult UpdateNote(int id,NoteMI note)
         {
             try
             {
                 var result = noteBI.UpdateNote(id, note);
+                return Ok(result);
+            }
+            catch (CustomException1 ex)
+            {
+                var result = new DTO
+                {
+                    Status = false,
+                    Message = ex.Message,
+                    Data = null
+                };
+                return BadRequest(result);
+            }
+            catch (Exception ex)
+            {
+                var result = new DTO
+                {
+                    Status = false,
+                    Message = ex.Message,
+                    Data = null
+                };
+                return StatusCode(500, result);
+            }
+        }
+        [HttpPut("archive")]
+        public IActionResult Archive(int id)
+        {
+            try
+            {
+                var result = noteBI.Archive(id);
+                return Ok(result);
+            }
+            catch (CustomException1 ex)
+            {
+                var result = new DTO
+                {
+                    Status = false,
+                    Message = ex.Message,
+                    Data = null
+                };
+                return BadRequest(result);
+            }
+            catch (Exception ex)
+            {
+                var result = new DTO
+                {
+                    Status = false,
+                    Message = ex.Message,
+                    Data = null
+                };
+                return StatusCode(500, result);
+            }
+        }
+        [HttpPut("trash")]
+        public IActionResult Trash(int id)
+        {
+            try
+            {
+                var result = noteBI.Trash(id);
                 return Ok(result);
             }
             catch (CustomException1 ex)

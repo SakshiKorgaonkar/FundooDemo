@@ -1,8 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "l+biAaPys8egfS6TfXWB08PYQhFqSLpuche92yXmGKgfXE7mx66refOW50RveWhPPqyZopYn2Ajr5l/TGxnYrQ==",
+  "dgSpecHash": "Jc3xX6PDK5CRWllf/jzb8Amf90rN2QHwgr7YVDnpLGwdCrBh7FuISUpr6jmw1B91nkT5rF4JgJrDCQKOE5zsLA==",
   "success": true,
   "projectFilePath": "C:\\Users\\DELL\\OneDrive - HERE Global B.V\\Desktop\\CDAC\\BridgeLabz_Assignment1\\Fundoo\\FundooDemo\\FundooDemo\\ModelLayer\\ModelLayer.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\DELL\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\mailkit\\4.6.0\\mailkit.4.6.0.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\mimekit\\4.6.0\\mimekit.4.6.0.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\system.formats.asn1\\8.0.0\\system.formats.asn1.8.0.0.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\system.security.cryptography.pkcs\\8.0.0\\system.security.cryptography.pkcs.8.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

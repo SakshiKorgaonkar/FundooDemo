@@ -40,7 +40,7 @@ namespace RepoLayer.Migrations
                     b.Property<bool>("isArchived")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("isDeleted")
+                    b.Property<bool>("isTrashed")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
@@ -68,8 +68,9 @@ namespace RepoLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("PhoneNumber")
-                        .HasColumnType("bigint");
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

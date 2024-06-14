@@ -15,5 +15,7 @@ namespace RepoLayer.Interface
         public List<Note> GetAllNotes();
         public Note GetNoteById(int id);
         public Note UpdateNote(int id,NoteMI note);
+        public Note Archive(int id);
+        public Note Trash(int id);
     }
 }

@@ -30,6 +30,18 @@ namespace BusinessLayer.Service
             }
         }
 
+        public Note Archive(int id)
+        {
+            try
+            {
+                return noteRI.Archive(id);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public List<Note> GetAllNotes()
         {
             try
@@ -59,6 +71,18 @@ namespace BusinessLayer.Service
             try
             {
                 return noteRI.RemoveNote(id);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public Note Trash(int id)
+        {
+            try
+            {
+                return noteRI.Trash(id);
             }
             catch (Exception ex)
             {

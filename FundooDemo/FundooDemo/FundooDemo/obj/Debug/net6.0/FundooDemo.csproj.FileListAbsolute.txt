@@ -73,3 +73,9 @@ C:\Users\DELL\OneDrive - HERE Global B.V\Desktop\CDAC\BridgeLabz_Assignment1\Fun
 C:\Users\DELL\OneDrive - HERE Global B.V\Desktop\CDAC\BridgeLabz_Assignment1\Fundoo\FundooDemo\FundooDemo\FundooDemo\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\DELL\OneDrive - HERE Global B.V\Desktop\CDAC\BridgeLabz_Assignment1\Fundoo\FundooDemo\FundooDemo\FundooDemo\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
 C:\Users\DELL\OneDrive - HERE Global B.V\Desktop\CDAC\BridgeLabz_Assignment1\Fundoo\FundooDemo\FundooDemo\FundooDemo\bin\Debug\net6.0\BCrypt.Net-Next.dll
+C:\Users\DELL\OneDrive - HERE Global B.V\Desktop\CDAC\BridgeLabz_Assignment1\Fundoo\FundooDemo\FundooDemo\FundooDemo\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
+C:\Users\DELL\OneDrive - HERE Global B.V\Desktop\CDAC\BridgeLabz_Assignment1\Fundoo\FundooDemo\FundooDemo\FundooDemo\bin\Debug\net6.0\MailKit.dll
+C:\Users\DELL\OneDrive - HERE Global B.V\Desktop\CDAC\BridgeLabz_Assignment1\Fundoo\FundooDemo\FundooDemo\FundooDemo\bin\Debug\net6.0\MimeKit.dll
+C:\Users\DELL\OneDrive - HERE Global B.V\Desktop\CDAC\BridgeLabz_Assignment1\Fundoo\FundooDemo\FundooDemo\FundooDemo\bin\Debug\net6.0\System.Formats.Asn1.dll
+C:\Users\DELL\OneDrive - HERE Global B.V\Desktop\CDAC\BridgeLabz_Assignment1\Fundoo\FundooDemo\FundooDemo\FundooDemo\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\DELL\OneDrive - HERE Global B.V\Desktop\CDAC\BridgeLabz_Assignment1\Fundoo\FundooDemo\FundooDemo\FundooDemo\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll

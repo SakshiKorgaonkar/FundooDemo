@@ -17,5 +17,9 @@ namespace RepoLayer.Interface
         public List<UserEntity> GetUsers();
 
         public UserEntity DeleteUser(int id);
+
+        public UserEntity ResetPassword(string email,string newPassword);
+
+        public UserEntity UpdateUser(int id,UserMl userMl);
     }
 }
