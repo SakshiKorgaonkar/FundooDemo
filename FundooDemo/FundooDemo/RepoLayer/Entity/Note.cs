@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace RepoLayer.Entity
 {
@@ -22,5 +23,7 @@ namespace RepoLayer.Entity
         public bool isArchived { get; set; }=false;
         [Required]
         public bool isTrashed { get; set; }=false ;
+        [JsonIgnore]
+        public ICollection<LabelNote> LabelNotes { get; set;}
     }
 }

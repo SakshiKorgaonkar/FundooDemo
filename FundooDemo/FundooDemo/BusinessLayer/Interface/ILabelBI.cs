@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepoLayer.Interface
+namespace BusinessLayer.Interface
 {
-    public interface ILabelRI
+    public interface ILabelBI
     {
         public Label AddLabel(LabelMI label);
         public Label RemoveLabel(int id);
         public List<Label> GetLabels();
         public Label GetLabel(int id);
-        public Label UpdateLabel(int id,LabelMI labelMI);
+        public Label UpdateLabel(int id, LabelMI labelMI);
     }
 }

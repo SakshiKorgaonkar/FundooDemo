@@ -17,5 +17,18 @@ namespace RepoLayer.Context
         public DbSet<Note> Notes { get; set; }
 
         public DbSet<Label> Labels { get; set; }
+
+        public DbSet<LabelNote> LabelNotes { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            
+            modelBuilder.Entity<LabelNote>().HasKey(ln=>new {ln.NoteId,ln.LabelId});
+
+            modelBuilder.Entity<LabelNote>().HasOne(ln=>ln.Note).WithMany(n=>n.LabelNotes).HasForeignKey(ln=>ln.NoteId);
+
+            modelBuilder.Entity<LabelNote>().HasOne(ln=>ln.Label).WithMany(l=>l.LabelNotes).HasForeignKey(ln=>ln.LabelId);
+        }
     }
 }

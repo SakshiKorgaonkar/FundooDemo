@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RepoLayer.Context;
 
@@ -10,9 +11,10 @@ using RepoLayer.Context;
 namespace RepoLayer.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    partial class ProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20240614092226_labelEntity")]
+    partial class labelEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,6 +22,21 @@ namespace RepoLayer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("LabelNote", b =>
+                {
+                    b.Property<int>("LabelsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NotesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LabelsId", "NotesId");
+
+                    b.HasIndex("NotesId");
+
+                    b.ToTable("LabelNote");
+                });
 
             modelBuilder.Entity("RepoLayer.Entity.Label", b =>
                 {
@@ -36,21 +53,6 @@ namespace RepoLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Labels");
-                });
-
-            modelBuilder.Entity("RepoLayer.Entity.LabelNote", b =>
-                {
-                    b.Property<int>("NoteId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LabelId")
-                        .HasColumnType("int");
-
-                    b.HasKey("NoteId", "LabelId");
-
-                    b.HasIndex("LabelId");
-
-                    b.ToTable("LabelNotes");
                 });
 
             modelBuilder.Entity("RepoLayer.Entity.Note", b =>
@@ -109,33 +111,19 @@ namespace RepoLayer.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("RepoLayer.Entity.LabelNote", b =>
+            modelBuilder.Entity("LabelNote", b =>
                 {
-                    b.HasOne("RepoLayer.Entity.Label", "Label")
-                        .WithMany("LabelNotes")
-                        .HasForeignKey("LabelId")
+                    b.HasOne("RepoLayer.Entity.Label", null)
+                        .WithMany()
+                        .HasForeignKey("LabelsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RepoLayer.Entity.Note", "Note")
-                        .WithMany("LabelNotes")
-                        .HasForeignKey("NoteId")
+                    b.HasOne("RepoLayer.Entity.Note", null)
+                        .WithMany()
+                        .HasForeignKey("NotesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Label");
-
-                    b.Navigation("Note");
-                });
-
-            modelBuilder.Entity("RepoLayer.Entity.Label", b =>
-                {
-                    b.Navigation("LabelNotes");
-                });
-
-            modelBuilder.Entity("RepoLayer.Entity.Note", b =>
-                {
-                    b.Navigation("LabelNotes");
                 });
 #pragma warning restore 612, 618
         }

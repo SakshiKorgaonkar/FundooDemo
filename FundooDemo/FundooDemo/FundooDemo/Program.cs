@@ -17,6 +17,10 @@ builder.Services.AddScoped<PasswordHashing>();
 builder.Services.AddScoped<TokenGenerator>();
 builder.Services.AddScoped<INoteRI, NoteRI>();
 builder.Services.AddScoped<INoteBI, NoteBI>();
+builder.Services.AddScoped<ILabelBI, LabelBI>();
+builder.Services.AddScoped<ILabelRI, LabelRI>();
+builder.Services.AddScoped<ILabelNoteRI,LabelNoteRI>();
+builder.Services.AddScoped<ILabelNoteBL,LabelNoteBL>();
 builder.Services.AddControllers();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
