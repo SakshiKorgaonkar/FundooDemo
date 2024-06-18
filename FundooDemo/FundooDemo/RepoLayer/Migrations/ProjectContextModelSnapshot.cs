@@ -21,7 +21,32 @@ namespace RepoLayer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("RepoLayer.Entity.Label", b =>
+            modelBuilder.Entity("RepoLayer.Entity.CollaboratorEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("NoteId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NoteId");
+
+                    b.HasIndex("Email", "NoteId")
+                        .IsUnique();
+
+                    b.ToTable("Collaborators");
+                });
+
+            modelBuilder.Entity("RepoLayer.Entity.LabelEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -38,7 +63,7 @@ namespace RepoLayer.Migrations
                     b.ToTable("Labels");
                 });
 
-            modelBuilder.Entity("RepoLayer.Entity.LabelNote", b =>
+            modelBuilder.Entity("RepoLayer.Entity.LabelNoteEntity", b =>
                 {
                     b.Property<int>("NoteId")
                         .HasColumnType("int");
@@ -53,7 +78,7 @@ namespace RepoLayer.Migrations
                     b.ToTable("LabelNotes");
                 });
 
-            modelBuilder.Entity("RepoLayer.Entity.Note", b =>
+            modelBuilder.Entity("RepoLayer.Entity.NoteEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -109,15 +134,26 @@ namespace RepoLayer.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("RepoLayer.Entity.LabelNote", b =>
+            modelBuilder.Entity("RepoLayer.Entity.CollaboratorEntity", b =>
                 {
-                    b.HasOne("RepoLayer.Entity.Label", "Label")
+                    b.HasOne("RepoLayer.Entity.NoteEntity", "Note")
+                        .WithMany("Collaborators")
+                        .HasForeignKey("NoteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Note");
+                });
+
+            modelBuilder.Entity("RepoLayer.Entity.LabelNoteEntity", b =>
+                {
+                    b.HasOne("RepoLayer.Entity.LabelEntity", "Label")
                         .WithMany("LabelNotes")
                         .HasForeignKey("LabelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RepoLayer.Entity.Note", "Note")
+                    b.HasOne("RepoLayer.Entity.NoteEntity", "Note")
                         .WithMany("LabelNotes")
                         .HasForeignKey("NoteId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -128,13 +164,15 @@ namespace RepoLayer.Migrations
                     b.Navigation("Note");
                 });
 
-            modelBuilder.Entity("RepoLayer.Entity.Label", b =>
+            modelBuilder.Entity("RepoLayer.Entity.LabelEntity", b =>
                 {
                     b.Navigation("LabelNotes");
                 });
 
-            modelBuilder.Entity("RepoLayer.Entity.Note", b =>
+            modelBuilder.Entity("RepoLayer.Entity.NoteEntity", b =>
                 {
+                    b.Navigation("Collaborators");
+
                     b.Navigation("LabelNotes");
                 });
 #pragma warning restore 612, 618

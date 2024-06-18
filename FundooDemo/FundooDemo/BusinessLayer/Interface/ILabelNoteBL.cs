@@ -9,9 +9,9 @@ namespace BusinessLayer.Interface
 {
     public interface ILabelNoteBL
     {
-        public Label AddLabelToNote(int labelId, int noteId);
-        public Label RemoveLabelFromNote(int labelId, int noteId);
-        public List<Label> GetAllLabelsFromNote(int noteId);
-        public List<Note> GetAllNotesFromLabel(int labelId);
+        public LabelEntity AddLabelToNote(int labelId, int noteId);
+        public LabelEntity RemoveLabelFromNote(int labelId, int noteId);
+        public List<LabelEntity> GetAllLabelsFromNote(int noteId);
+        public List<NoteEntity> GetAllNotesFromLabel(int labelId);
     }
 }

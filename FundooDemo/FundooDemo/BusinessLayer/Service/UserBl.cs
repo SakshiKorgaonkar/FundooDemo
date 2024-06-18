@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Service
 {
-    public class UserBl:IUserBl
+    public class UserBL:IUserBL
     {
-        private readonly IUserRl userRl;
+        private readonly IUserRL userRl;
 
-        public UserBl(IUserRl userRl)
+        public UserBL(IUserRL userRl)
         {
             this.userRl = userRl;
         }
-        public UserEntity RegisterUser(UserMl userMl)
+        public UserEntity RegisterUser(UserML userMl)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace BusinessLayer.Service
                 throw;
             }
         } 
-        public string LoginUser(LoginMl loginMl)
+        public string LoginUser(LoginML loginMl)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace BusinessLayer.Service
                 throw;
             }
         }
-        public UserEntity UpdateUser(int id,UserMl userMl)
+        public UserEntity UpdateUser(int id,UserML userMl)
         {
             try
             {

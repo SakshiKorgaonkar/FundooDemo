@@ -13,18 +13,18 @@ using System.Text;
 
 namespace RepoLayer.Service
 {
-    public class UserRl:IUserRl
+    public class UserRL:IUserRL
     {
         private readonly ProjectContext projectContext;
         private readonly PasswordHashing passwordHashing;
         private readonly TokenGenerator tokenGenerator;
-        public UserRl(ProjectContext projectContext, PasswordHashing passwordHashing, TokenGenerator tokenGenerator)
+        public UserRL(ProjectContext projectContext, PasswordHashing passwordHashing, TokenGenerator tokenGenerator)
         {
             this.projectContext = projectContext;
             this.passwordHashing = passwordHashing;
             this.tokenGenerator = tokenGenerator;
         }
-        public UserEntity RegisterUser(UserMl userMl)
+        public UserEntity RegisterUser(UserML userMl)
         {
             var result=projectContext.Users.FirstOrDefault(u => u.Email == userMl.Email);
             if(result != null)
@@ -47,7 +47,7 @@ namespace RepoLayer.Service
                 throw new Exception("Something went wrong");
             }
         }
-        public string LoginUser(LoginMl loginMl)
+        public string LoginUser(LoginML loginMl)
         {
             var result=projectContext.Users.FirstOrDefault(u=>u.Email== loginMl.Email);
             if(result == null)
@@ -114,7 +114,7 @@ namespace RepoLayer.Service
             projectContext.SaveChanges();
             return user;
         }
-        public UserEntity UpdateUser(int id,UserMl user)
+        public UserEntity UpdateUser(int id,UserML user)
         {
             var userToUpdate=projectContext.Users.FirstOrDefault(y => y.Id == id);
             if(userToUpdate == null)

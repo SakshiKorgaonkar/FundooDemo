@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace ModelLayer
 {
-    public class LabelMI
+    public class CollaboratorML
     {
-        public string Name {  get; set; }
+        public string Email {  get; set; }
+        public int NoteId { get; set; }
     }
 }

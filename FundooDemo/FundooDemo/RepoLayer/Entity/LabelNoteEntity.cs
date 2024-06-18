@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace RepoLayer.Entity
 {
-    public class LabelNote
+    public class LabelNoteEntity
     {
         public int NoteId {  get; set; }
         public int LabelId {  get; set; }
-        public Note Note { get; set; }
-        public Label Label { get; set; }
+        public NoteEntity Note { get; set; }
+        public LabelEntity Label { get; set; }
     }
 }

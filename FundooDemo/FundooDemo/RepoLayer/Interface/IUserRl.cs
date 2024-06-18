@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace RepoLayer.Interface
 {
-    public interface IUserRl
+    public interface IUserRL
     {
-        public UserEntity RegisterUser(UserMl userMl);
+        public UserEntity RegisterUser(UserML userMl);
 
-        public string LoginUser(LoginMl loginMl);
+        public string LoginUser(LoginML loginMl);
 
         public List<UserEntity> GetUsers();
 
@@ -20,6 +20,6 @@ namespace RepoLayer.Interface
 
         public UserEntity ResetPassword(string email,string newPassword);
 
-        public UserEntity UpdateUser(int id,UserMl userMl);
+        public UserEntity UpdateUser(int id,UserML userMl);
     }
 }

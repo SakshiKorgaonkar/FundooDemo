@@ -11,16 +11,18 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<IUserRl, UserRl>();
-builder.Services.AddScoped<IUserBl, UserBl>();
+builder.Services.AddScoped<IUserRL, UserRL>();
+builder.Services.AddScoped<IUserBL, UserBL>();
 builder.Services.AddScoped<PasswordHashing>();
 builder.Services.AddScoped<TokenGenerator>();
-builder.Services.AddScoped<INoteRI, NoteRI>();
-builder.Services.AddScoped<INoteBI, NoteBI>();
-builder.Services.AddScoped<ILabelBI, LabelBI>();
-builder.Services.AddScoped<ILabelRI, LabelRI>();
-builder.Services.AddScoped<ILabelNoteRI,LabelNoteRI>();
+builder.Services.AddScoped<INoteRL, NoteRL>();
+builder.Services.AddScoped<INoteBL, NoteBL>();
+builder.Services.AddScoped<ILabelBL, LabelBL>();
+builder.Services.AddScoped<ILabelRL, LabelRL>();
+builder.Services.AddScoped<ILabelNoteRL,LabelNoteRL>();
 builder.Services.AddScoped<ILabelNoteBL,LabelNoteBL>();
+builder.Services.AddScoped<ICollaboratorBL, CollaboratorBL>();
+builder.Services.AddScoped<ICollaboratorRL, CollaboratorRL>();
 builder.Services.AddControllers();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

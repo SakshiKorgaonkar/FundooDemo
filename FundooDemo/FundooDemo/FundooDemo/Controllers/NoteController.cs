@@ -12,17 +12,17 @@ namespace FundooDemo.Controllers
     [ApiController]
     public class NoteController : ControllerBase
     {
-        private readonly INoteBI noteBI;
-        public NoteController(INoteBI noteBI)
+        private readonly INoteBL noteBl;
+        public NoteController(INoteBL noteBl)
         {
-            this.noteBI = noteBI;
+            this.noteBl = noteBl;
         }
         [HttpPost]
-        public IActionResult AddNote(NoteMI note)
+        public IActionResult AddNote(NoteML note)
         {
             try
             {
-                var result = noteBI.AddNote(note);
+                var result = noteBl.AddNote(note);
                 return Ok(result);
             }
             catch (CustomException1 ex)
@@ -51,7 +51,7 @@ namespace FundooDemo.Controllers
         {
             try
             {
-                var result = noteBI.RemoveNote(id);
+                var result = noteBl.RemoveNote(id);
                 return Ok(result);
             }
             catch (CustomException1 ex)
@@ -80,7 +80,7 @@ namespace FundooDemo.Controllers
         {
             try
             {
-                var result = noteBI.GetAllNotes();
+                var result = noteBl.GetAllNotes();
                 return Ok(result);
             }
             catch(CustomException1 ex) 
@@ -109,7 +109,7 @@ namespace FundooDemo.Controllers
         {
             try
             {
-                var result = noteBI.GetNoteById(id);
+                var result = noteBl.GetNoteById(id);
                 return Ok(result);
             }
             catch (CustomException1 ex)
@@ -134,11 +134,11 @@ namespace FundooDemo.Controllers
             }
         }
         [HttpPut]
-        public IActionResult UpdateNote(int id,NoteMI note)
+        public IActionResult UpdateNote(int id,NoteML note)
         {
             try
             {
-                var result = noteBI.UpdateNote(id, note);
+                var result = noteBl.UpdateNote(id, note);
                 return Ok(result);
             }
             catch (CustomException1 ex)
@@ -167,7 +167,7 @@ namespace FundooDemo.Controllers
         {
             try
             {
-                var result = noteBI.Archive(id);
+                var result = noteBl.Archive(id);
                 return Ok(result);
             }
             catch (CustomException1 ex)
@@ -196,7 +196,7 @@ namespace FundooDemo.Controllers
         {
             try
             {
-                var result = noteBI.Trash(id);
+                var result = noteBl.Trash(id);
                 return Ok(result);
             }
             catch (CustomException1 ex)

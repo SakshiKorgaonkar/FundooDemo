@@ -13,15 +13,15 @@ using System.Threading.Tasks;
 
 namespace RepoLayer.Service
 {
-    public class LabelNoteRI : ILabelNoteRI
+    public class LabelNoteRL : ILabelNoteRL
     {
         private readonly ProjectContext projectContext;
-        public LabelNoteRI(ProjectContext _projectContext)
+        public LabelNoteRL(ProjectContext _projectContext)
         {
             projectContext = _projectContext;
         }
 
-        public Label AddLabelToNote(int labelId, int noteId)
+        public LabelEntity AddLabelToNote(int labelId, int noteId)
         {
             var note=projectContext.Notes.FirstOrDefault(x=>x.Id==noteId);
             var label=projectContext.Labels.FirstOrDefault(x=>x.Id==labelId);
@@ -29,13 +29,13 @@ namespace RepoLayer.Service
             {
                 throw new CustomException1("Note/Label doesn't exist");
             }
-            var labelNote=new LabelNote { NoteId=noteId ,LabelId=labelId};
+            var labelNote=new LabelNoteEntity { NoteId=noteId ,LabelId=labelId};
             projectContext.LabelNotes.Add(labelNote);
             projectContext.SaveChanges();
             return label;
         }
 
-        public List<Label> GetAllLabelsFromNote(int noteId)
+        public List<LabelEntity> GetAllLabelsFromNote(int noteId)
         {
             var note= projectContext.Notes.Include(n=>n.LabelNotes)
                                         .ThenInclude(ln=>ln.Label)
@@ -47,7 +47,7 @@ namespace RepoLayer.Service
             return note.LabelNotes.Select(n=>n.Label).ToList();
         }
 
-        public List<Note> GetAllNotesFromLabel(int labelId)
+        public List<NoteEntity> GetAllNotesFromLabel(int labelId)
         {
             var label = projectContext.Labels.Include(l => l.LabelNotes)
                                          .ThenInclude(ln => ln.Note)
@@ -60,7 +60,7 @@ namespace RepoLayer.Service
             return label.LabelNotes.Select(ln => ln.Note).ToList();
         }
 
-        public Label RemoveLabelFromNote(int labelId, int noteId)
+        public LabelEntity RemoveLabelFromNote(int labelId, int noteId)
         {
             var labelNote = projectContext.LabelNotes.FirstOrDefault(ln => ln.NoteId == noteId && ln.LabelId == labelId);
             if (labelNote == null)

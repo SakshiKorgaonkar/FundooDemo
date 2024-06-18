@@ -13,18 +13,18 @@ using System.Threading.Tasks;
 
 namespace RepoLayer.Service
 {
-    public class NoteRI : INoteRI
+    public class NoteRL : INoteRL
     {
         private readonly ProjectContext projectContext;
 
-        public NoteRI(ProjectContext projectContext)
+        public NoteRL(ProjectContext projectContext)
         {
             this.projectContext = projectContext;
         }
 
-        public Note AddNote(NoteMI note)
+        public NoteEntity AddNote(NoteML note)
         {
-            Note note1 = new Note();
+            NoteEntity note1 = new NoteEntity();
             note1.Title= note.Title;
             note1.Description= note.Description;
             projectContext.Notes.Add(note1);
@@ -32,14 +32,14 @@ namespace RepoLayer.Service
             return note1;
         }
 
-        public List<Note> GetAllNotes()
+        public List<NoteEntity> GetAllNotes()
         {
             if (projectContext.Notes == null)
             {
                 throw new CustomException1("No notes added");
             }
-            List<Note> notes = new List<Note>();    
-            foreach (Note note in projectContext.Notes)
+            List<NoteEntity> notes = new List<NoteEntity>();    
+            foreach (NoteEntity note in projectContext.Notes)
             {
                 if(note.isTrashed==false && note.isArchived == false)
                 {
@@ -49,7 +49,7 @@ namespace RepoLayer.Service
             return notes.ToList();
         }
 
-        public Note GetNoteById(int id)
+        public NoteEntity GetNoteById(int id)
         {
             var note = projectContext.Notes.FirstOrDefault(x => x.Id == id);
             if(note == null)
@@ -59,7 +59,7 @@ namespace RepoLayer.Service
             return note;
         }
 
-        public Note RemoveNote(int id)
+        public NoteEntity RemoveNote(int id)
         {
             var note = projectContext.Notes.FirstOrDefault(x => x.Id == id);
             if (note == null)
@@ -71,7 +71,7 @@ namespace RepoLayer.Service
             return note;
         }
 
-        public Note UpdateNote(int id,NoteMI updatedNote)
+        public NoteEntity UpdateNote(int id,NoteML updatedNote)
         {
             var note = projectContext.Notes.FirstOrDefault(x => x.Id == id);
             if (note == null)
@@ -84,7 +84,7 @@ namespace RepoLayer.Service
             projectContext.SaveChanges();
             return note;
         }
-        public Note Archive(int id)
+        public NoteEntity Archive(int id)
         {
             var noteToArchive=projectContext.Notes.FirstOrDefault(x=>x.Id== id);
             if(noteToArchive == null)
@@ -100,7 +100,7 @@ namespace RepoLayer.Service
             projectContext.SaveChanges();
             return noteToArchive;
         }
-        public Note Trash(int id)
+        public NoteEntity Trash(int id)
         {
             var noteToTrash= projectContext.Notes.FirstOrDefault(x => x.Id == id);
             if (noteToTrash == null)

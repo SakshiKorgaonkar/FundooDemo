@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RepoLayer.Entity
 {
-    public class Label
+    public class LabelEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -17,6 +17,6 @@ namespace RepoLayer.Entity
         [Required]
         public string Name { get; set; }
         [JsonIgnore]
-        public ICollection<LabelNote> LabelNotes { get; set;}
+        public ICollection<LabelNoteEntity> LabelNotes { get; set;}
     }
 }

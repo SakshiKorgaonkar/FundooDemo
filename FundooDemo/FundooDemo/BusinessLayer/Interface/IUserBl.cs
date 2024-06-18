@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Interface
 {
-    public interface IUserBl
+    public interface IUserBL
     {
-        public UserEntity RegisterUser(UserMl userMl);
+        public UserEntity RegisterUser(UserML userMl);
 
-        public string LoginUser(LoginMl loginMl);
+        public string LoginUser(LoginML loginMl);
         public List<UserEntity> GetUsers();
 
         public UserEntity DeleteUser(int id);
         public UserEntity ResetPassword(string email,string password);
 
-        public UserEntity UpdateUser(int id,UserMl userMl);
+        public UserEntity UpdateUser(int id,UserML userMl);
 
     }
 }

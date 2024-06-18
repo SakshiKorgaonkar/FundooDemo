@@ -10,19 +10,19 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Service
 {
-    public class LabelBI : ILabelBI
+    public class LabelBL : ILabelBL
     {
-        private readonly ILabelRI labelRI;
+        private readonly ILabelRL labelRl;
 
-        public LabelBI(ILabelRI labelRI)
+        public LabelBL(ILabelRL labelRl)
         {
-            this.labelRI = labelRI;
+            this.labelRl = labelRl;
         }
-        public Label AddLabel(LabelMI label)
+        public LabelEntity AddLabel(LabelML label)
         {
             try
             {
-                return labelRI.AddLabel(label);
+                return labelRl.AddLabel(label);
             }
             catch(Exception ex) 
             {
@@ -30,11 +30,11 @@ namespace BusinessLayer.Service
             }
         }
 
-        public Label GetLabel(int id)
+        public LabelEntity GetLabel(int id)
         {
             try
             {
-                return labelRI.GetLabel(id);
+                return labelRl.GetLabel(id);
             }
             catch (Exception ex)
             {
@@ -42,11 +42,11 @@ namespace BusinessLayer.Service
             }
         }
 
-        public List<Label> GetLabels()
+        public List<LabelEntity> GetLabels()
         {
             try
             {
-                return labelRI.GetLabels();
+                return labelRl.GetLabels();
             }
             catch (Exception ex)
             {
@@ -54,11 +54,11 @@ namespace BusinessLayer.Service
             }
         }
 
-        public Label RemoveLabel(int id)
+        public LabelEntity RemoveLabel(int id)
         {
             try
             {
-                return labelRI.RemoveLabel(id);
+                return labelRl.RemoveLabel(id);
             }
             catch (Exception ex)
             {
@@ -66,11 +66,11 @@ namespace BusinessLayer.Service
             }
         }
 
-        public Label UpdateLabel(int id, LabelMI labelMI)
+        public LabelEntity UpdateLabel(int id, LabelML labelMI)
         {
             try
             {
-                return labelRI.UpdateLabel(id,labelMI);
+                return labelRl.UpdateLabel(id,labelMI);
             }
             catch (Exception ex)
             {

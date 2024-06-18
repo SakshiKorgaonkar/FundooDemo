@@ -17,17 +17,17 @@ namespace FundooDemo.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserBl userBl;
+        private readonly IUserBL userBl;
         private readonly ProjectContext projectContext;
         private readonly TokenGenerator tokenGenerator;
-        public UserController(IUserBl userBl, ProjectContext projectContext, TokenGenerator tokenGenerator)
+        public UserController(IUserBL userBl, ProjectContext projectContext, TokenGenerator tokenGenerator)
         {
             this.userBl = userBl;
             this.projectContext = projectContext;
             this.tokenGenerator = tokenGenerator;
         }
         [HttpPost("register")]
-        public IActionResult RegisterUser(UserMl userMl)
+        public IActionResult RegisterUser(UserML userMl)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace FundooDemo.Controllers
             }
         }
         [HttpPost("login")]
-        public IActionResult LoginUser(LoginMl loginMl)
+        public IActionResult LoginUser(LoginML loginMl)
         {
             try
             {
@@ -230,7 +230,7 @@ namespace FundooDemo.Controllers
             }
         }
         [HttpPost("update")]
-        public IActionResult UpdateUser(int id,UserMl user)
+        public IActionResult UpdateUser(int id,UserML user)
         {
             try
             {

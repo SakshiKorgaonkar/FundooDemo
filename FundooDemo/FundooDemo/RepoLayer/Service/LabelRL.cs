@@ -11,23 +11,23 @@ using System.Threading.Tasks;
 
 namespace RepoLayer.Service
 {
-    public class LabelRI : ILabelRI
+    public class LabelRL : ILabelRL
     {
         private readonly ProjectContext projectContext;
 
-        public LabelRI(ProjectContext projectContext)
+        public LabelRL(ProjectContext projectContext)
         {
             this.projectContext = projectContext;
         }
-        public Label AddLabel(LabelMI label) 
+        public LabelEntity AddLabel(LabelML label) 
         {
-            Label label1 = new Label();
+            LabelEntity label1 = new LabelEntity();
             label1.Name = label.Name;
             projectContext.Labels.Add(label1);
             projectContext.SaveChanges();
             return label1;
         }
-        public Label RemoveLabel(int id) 
+        public LabelEntity RemoveLabel(int id) 
         {
             var label = projectContext.Labels.FirstOrDefault(x => x.Id == id);
             if (label == null) 
@@ -38,7 +38,7 @@ namespace RepoLayer.Service
             projectContext.SaveChanges();
             return label;
         }
-        public Label GetLabel(int id)
+        public LabelEntity GetLabel(int id)
         {
             var label = projectContext.Labels.FirstOrDefault(x => x.Id == id);
             if (label == null)
@@ -47,7 +47,7 @@ namespace RepoLayer.Service
             }
             return label;
         }
-        public List<Label> GetLabels()
+        public List<LabelEntity> GetLabels()
         {
             if(projectContext.Labels == null)
             {
@@ -55,7 +55,7 @@ namespace RepoLayer.Service
             }
             return projectContext.Labels.ToList();
         }
-        public Label UpdateLabel(int id, LabelMI labelMI)
+        public LabelEntity UpdateLabel(int id, LabelML labelMI)
         {
             var label = projectContext.Labels.FirstOrDefault(x => x.Id == id);
             if (label == null)

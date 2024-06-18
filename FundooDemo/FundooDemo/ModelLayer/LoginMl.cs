@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelLayer
 {
-    public class LoginMl
+    public class LoginML
     {
         public string Password { get; set; }
         public string Email { get; set; }

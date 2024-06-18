@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ModelLayer
 {
-    public class UserMl
+    public class UserML
     {
         public string Name {  get; set; }
         public string Password { get; set; }

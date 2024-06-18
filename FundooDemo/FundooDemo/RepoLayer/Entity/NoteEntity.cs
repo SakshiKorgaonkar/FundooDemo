@@ -10,7 +10,7 @@ using System.Text.Json.Serialization;
 
 namespace RepoLayer.Entity
 {
-    public class Note
+    public class NoteEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -24,6 +24,8 @@ namespace RepoLayer.Entity
         [Required]
         public bool isTrashed { get; set; }=false ;
         [JsonIgnore]
-        public ICollection<LabelNote> LabelNotes { get; set;}
+        public ICollection<LabelNoteEntity> LabelNotes { get; set;}
+        [JsonIgnore]
+        public ICollection<CollaboratorEntity> Collaborators { get; set;}
     }
 }

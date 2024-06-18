@@ -11,17 +11,17 @@ namespace BusinessLayer.Service
 {
     public class LabelNoteBL : ILabelNoteBL
     {
-        private readonly ILabelNoteRI labelNoteRI;
-        public LabelNoteBL(ILabelNoteRI labelNoteRI)
+        private readonly ILabelNoteRL labelNoteRl;
+        public LabelNoteBL(ILabelNoteRL labelNoteRl)
         {
-            this.labelNoteRI = labelNoteRI;
+            this.labelNoteRl = labelNoteRl;
         }
 
-        public Label AddLabelToNote(int labelId, int noteId)
+        public LabelEntity AddLabelToNote(int labelId, int noteId)
         {
             try
             {
-                return labelNoteRI.AddLabelToNote(labelId, noteId);
+                return labelNoteRl.AddLabelToNote(labelId, noteId);
             }
             catch(Exception ex)
             {
@@ -29,11 +29,11 @@ namespace BusinessLayer.Service
             }
         }
 
-        public List<Label> GetAllLabelsFromNote(int noteId)
+        public List<LabelEntity> GetAllLabelsFromNote(int noteId)
         {
             try
             {
-                return labelNoteRI.GetAllLabelsFromNote(noteId);
+                return labelNoteRl.GetAllLabelsFromNote(noteId);
             }
             catch (Exception ex)
             {
@@ -41,11 +41,11 @@ namespace BusinessLayer.Service
             }
         }
 
-        public List<Note> GetAllNotesFromLabel(int labelId)
+        public List<NoteEntity> GetAllNotesFromLabel(int labelId)
         {
             try
             {
-                return labelNoteRI.GetAllNotesFromLabel(labelId);
+                return labelNoteRl.GetAllNotesFromLabel(labelId);
             }
             catch (Exception ex)
             {
@@ -53,11 +53,11 @@ namespace BusinessLayer.Service
             }
         }
 
-        public Label RemoveLabelFromNote(int labelId, int noteId)
+        public LabelEntity RemoveLabelFromNote(int labelId, int noteId)
         {
             try
             {
-                return labelNoteRI.RemoveLabelFromNote(labelId, noteId);
+                return labelNoteRl.RemoveLabelFromNote(labelId, noteId);
             }
             catch (Exception ex)
             {

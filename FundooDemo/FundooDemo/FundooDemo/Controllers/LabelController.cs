@@ -10,18 +10,18 @@ namespace FundooDemo.Controllers
     [ApiController]
     public class LabelController : ControllerBase
     {
-        private readonly ILabelBI labelBI;
+        private readonly ILabelBL labelBl;
 
-        public LabelController(ILabelBI labelBI)
+        public LabelController(ILabelBL labelBl)
         {
-            this.labelBI = labelBI;
+            this.labelBl = labelBl;
         }
         [HttpPost]
-        public IActionResult AddLabel(LabelMI labelMI)
+        public IActionResult AddLabel(LabelML labelMl)
         {
             try
             {
-                var result=labelBI.AddLabel(labelMI);
+                var result=labelBl.AddLabel(labelMl);
                 return Ok(result);
             }
             catch (CustomException1 ex)
@@ -50,7 +50,7 @@ namespace FundooDemo.Controllers
         {
             try
             {
-                var result=labelBI.GetLabels();
+                var result=labelBl.GetLabels();
                 return Ok(result);
             }
             catch (CustomException1 ex)
@@ -79,7 +79,7 @@ namespace FundooDemo.Controllers
         {
             try
             {
-                var result = labelBI.GetLabel(id);
+                var result = labelBl.GetLabel(id);
                 return Ok(result);
             }
             catch (CustomException1 ex)
@@ -104,11 +104,11 @@ namespace FundooDemo.Controllers
             }
         }
         [HttpPut]
-        public IActionResult UpdateLabel(int id,LabelMI label)
+        public IActionResult UpdateLabel(int id,LabelML label)
         {
             try
             {
-                var result = labelBI.UpdateLabel(id, label);
+                var result = labelBl.UpdateLabel(id, label);
                 return Ok(result);
             }
             catch (CustomException1 ex)
@@ -137,7 +137,7 @@ namespace FundooDemo.Controllers
         {
             try
             {
-                var result = labelBI.RemoveLabel(id);
+                var result = labelBl.RemoveLabel(id);
                 return Ok(result);
             }
             catch (CustomException1 ex)

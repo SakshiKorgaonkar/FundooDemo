@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ModelLayer
 {
-    public class NoteMI
+    public class NoteML
     {
         public string Title { get; set; }     
         public string Description { get; set; }

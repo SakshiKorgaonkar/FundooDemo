@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Service
 {
-    public class NoteBI : INoteBI
+    public class NoteBL : INoteBL
     {
-        private readonly INoteRI noteRI;
+        private readonly INoteRL noteRI;
 
-        public NoteBI(INoteRI _noteRI)
+        public NoteBL(INoteRL _noteRI)
         {
             this.noteRI = _noteRI;
         }
-        public Note AddNote(NoteMI note)
+        public NoteEntity AddNote(NoteML note)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace BusinessLayer.Service
             }
         }
 
-        public Note Archive(int id)
+        public NoteEntity Archive(int id)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace BusinessLayer.Service
             }
         }
 
-        public List<Note> GetAllNotes()
+        public List<NoteEntity> GetAllNotes()
         {
             try
             {
@@ -54,7 +54,7 @@ namespace BusinessLayer.Service
             }
         }
 
-        public Note GetNoteById(int id)
+        public NoteEntity GetNoteById(int id)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace BusinessLayer.Service
             }
         }
 
-        public Note RemoveNote(int id)
+        public NoteEntity RemoveNote(int id)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace BusinessLayer.Service
             }
         }
 
-        public Note Trash(int id)
+        public NoteEntity Trash(int id)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace BusinessLayer.Service
             }
         }
 
-        public Note UpdateNote(int id,NoteMI note)
+        public NoteEntity UpdateNote(int id,NoteML note)
         {
             try
             {
