@@ -6,6 +6,7 @@ using RepoLayer.Entity;
 using RepoLayer.Interface;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
@@ -108,13 +109,38 @@ namespace RepoLayer.Service
                 throw new CustomException1("Note doesn't exist");
             }
             noteToTrash.isTrashed = !noteToTrash.isTrashed;
-            if (noteToTrash.isArchived)
-            {
-                noteToTrash.isArchived = !noteToTrash.isArchived;
-            }
+            
             projectContext.Notes.Update(noteToTrash);
             projectContext.SaveChanges();
             return noteToTrash;
+        }
+
+        public List<NoteEntity> GetAllTrashNotes()
+        {
+            var result=projectContext.Notes.ToList();
+            List<NoteEntity> list=new List<NoteEntity>();
+            foreach(var note in result)
+            {
+                if (note.isTrashed)
+                {
+                    list.Add(note);
+                }
+            }
+            return list;
+        }
+
+        public List<NoteEntity> GetAllArchiveNotes()
+        {
+            var result = projectContext.Notes.ToList();
+            List<NoteEntity> list = new List<NoteEntity>();
+            foreach (var note in result)
+            {
+                if (note.isArchived && note.isTrashed==false)
+                {
+                    list.Add(note);
+                }
+            }
+            return list;
         }
     }
 }

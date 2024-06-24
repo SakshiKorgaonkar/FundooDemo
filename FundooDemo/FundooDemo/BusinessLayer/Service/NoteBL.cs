@@ -42,11 +42,35 @@ namespace BusinessLayer.Service
             }
         }
 
+        public List<NoteEntity> GetAllArchiveNotes()
+        {
+            try
+            {
+                return noteRI.GetAllArchiveNotes();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public List<NoteEntity> GetAllNotes()
         {
             try
             {
                 return noteRI.GetAllNotes();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public List<NoteEntity> GetAllTrashNotes()
+        {
+            try
+            {
+                return noteRI.GetAllTrashNotes();
             }
             catch (Exception ex)
             {

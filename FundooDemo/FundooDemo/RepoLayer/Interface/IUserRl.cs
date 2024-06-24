@@ -21,5 +21,8 @@ namespace RepoLayer.Interface
         public UserEntity ResetPassword(string email,string newPassword);
 
         public UserEntity UpdateUser(int id,UserML userMl);
+
+        public void SetSession(string key, string value);
+        public string GetSession(string key);
     }
 }

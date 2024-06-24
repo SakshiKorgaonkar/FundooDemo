@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MimeKit;
 using ModelLayer;
@@ -18,11 +19,13 @@ namespace RepoLayer.Service
         private readonly ProjectContext projectContext;
         private readonly PasswordHashing passwordHashing;
         private readonly TokenGenerator tokenGenerator;
-        public UserRL(ProjectContext projectContext, PasswordHashing passwordHashing, TokenGenerator tokenGenerator)
+        private readonly IHttpContextAccessor httpContextAccessor;
+        public UserRL(ProjectContext projectContext, PasswordHashing passwordHashing, TokenGenerator tokenGenerator,IHttpContextAccessor httpContextAccessor)
         {
             this.projectContext = projectContext;
             this.passwordHashing = passwordHashing;
             this.tokenGenerator = tokenGenerator;
+            this.httpContextAccessor = httpContextAccessor;
         }
         public UserEntity RegisterUser(UserML userMl)
         {
@@ -59,7 +62,10 @@ namespace RepoLayer.Service
                 bool isPasswordValid = passwordHashing.VerifyPassword(loginMl.Password,result.Password);
                 if (isPasswordValid)
                 {
-                    return tokenGenerator.GenerateToken(result);
+                    var token = tokenGenerator.GenerateToken(result);
+                    SetSession("UserId", result.Id.ToString()); 
+                    SetSession("UserEmail", result.Email); 
+                    return token;
                 }
                 else
                 {
@@ -128,6 +134,15 @@ namespace RepoLayer.Service
             projectContext.Users.Update(userToUpdate);
             projectContext.SaveChanges();
             return userToUpdate;
+        }
+        public void SetSession(string key, string value)
+        {
+            httpContextAccessor.HttpContext.Session.SetString(key, value);
+        }
+
+        public string GetSession(string key)
+        {
+            return httpContextAccessor.HttpContext.Session.GetString(key);
         }
     }
 }

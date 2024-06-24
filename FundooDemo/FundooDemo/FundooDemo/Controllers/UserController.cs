@@ -10,6 +10,8 @@ using MailKit.Net.Smtp;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace FundooDemo.Controllers
 {
@@ -256,6 +258,26 @@ namespace FundooDemo.Controllers
                     Data = null
                 };
                 return StatusCode(500, result);
+            }
+        }
+        [HttpGet("session-info")]
+        public IActionResult GetSessionInfo()
+        {
+            try
+            {
+                var userId = userBl.GetSession("UserId");
+                var userEmail = userBl.GetSession("UserEmail");
+
+                if (userId == null || userEmail == null)
+                {
+                    return NotFound("Session information not found.");
+                }
+
+                return Ok(new { UserId = userId, UserEmail = userEmail });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
     }

@@ -32,12 +32,10 @@ namespace RepoLayer.Service
             {
                 throw new CustomException1("Collaborator already exists");
             }
-
             var collab = new CollaboratorEntity { NoteId = noteId, Email = email };
             projectContext.Collaborators.Add(collab);
             projectContext.SaveChanges();
             return email;
-
         }
 
         public List<CollaboratorEntity> GetCollaboratorByNoteId(int noteId)
@@ -50,7 +48,6 @@ namespace RepoLayer.Service
             {
                 throw new CustomException1("Note doesn't exist");
             }
-
             return note.Collaborators.ToList();
         }
 

@@ -15,8 +15,9 @@ namespace BusinessLayer.Interface
         public List<NoteEntity> GetAllNotes();
         public NoteEntity GetNoteById(int id);
         public NoteEntity UpdateNote(int id,NoteML note);
-
         public NoteEntity Archive(int id);
-        public NoteEntity Trash(int id);  
+        public NoteEntity Trash(int id);
+        public List<NoteEntity> GetAllTrashNotes();       
+        public List<NoteEntity> GetAllArchiveNotes();
     }
 }

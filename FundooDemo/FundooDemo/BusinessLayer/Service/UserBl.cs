@@ -2,6 +2,7 @@
 using ModelLayer;
 using RepoLayer.Entity;
 using RepoLayer.Interface;
+using RepoLayer.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,6 +79,30 @@ namespace BusinessLayer.Service
             try
             {
                 return userRl.UpdateUser(id, userMl);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public void SetSession(string key, string value)
+        {
+            try
+            {
+                userRl.SetSession(key, value);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public string GetSession(string key)
+        {
+            try
+            {
+                return userRl.GetSession(key);
             }
             catch (Exception ex)
             {

@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace RepoLayer.Entity
 {
-    
     public class CollaboratorEntity
     {
         [Key]

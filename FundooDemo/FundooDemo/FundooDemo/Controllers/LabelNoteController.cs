@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Interface;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModelLayer;
@@ -9,6 +10,7 @@ namespace FundooDemo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors]
     public class LabelNoteController : ControllerBase
     {
         private readonly ILabelNoteBL labelNoteBL;

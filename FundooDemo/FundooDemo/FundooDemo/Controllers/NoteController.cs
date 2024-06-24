@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Interface;
 using BusinessLayer.Service;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ModelLayer;
@@ -10,6 +11,7 @@ namespace FundooDemo.Controllers
 {
     [Route("api/notes")]
     [ApiController]
+    [EnableCors("corspolicy")]
     public class NoteController : ControllerBase
     {
         private readonly INoteBL noteBl;
@@ -197,6 +199,64 @@ namespace FundooDemo.Controllers
             try
             {
                 var result = noteBl.Trash(id);
+                return Ok(result);
+            }
+            catch (CustomException1 ex)
+            {
+                var result = new DTO
+                {
+                    Status = false,
+                    Message = ex.Message,
+                    Data = null
+                };
+                return BadRequest(result);
+            }
+            catch (Exception ex)
+            {
+                var result = new DTO
+                {
+                    Status = false,
+                    Message = ex.Message,
+                    Data = null
+                };
+                return StatusCode(500, result);
+            }
+        }
+        [HttpGet("allTrash")]
+        public IActionResult GetAllTrashNotes()
+        {
+            try
+            {
+                var result = noteBl.GetAllTrashNotes();
+                return Ok(result);
+            }
+            catch (CustomException1 ex)
+            {
+                var result = new DTO
+                {
+                    Status = false,
+                    Message = ex.Message,
+                    Data = null
+                };
+                return BadRequest(result);
+            }
+            catch (Exception ex)
+            {
+                var result = new DTO
+                {
+                    Status = false,
+                    Message = ex.Message,
+                    Data = null
+                };
+                return StatusCode(500, result);
+            }
+        }
+        [HttpGet("allArchive")]
+        public IActionResult GetAllArchiveNotes()
+        {
+            try
+            {
+                var result = noteBl.GetAllArchiveNotes();
                 return Ok(result);
             }
             catch (CustomException1 ex)
