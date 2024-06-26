@@ -97,7 +97,6 @@ namespace BusinessLayer.Service
                 throw;
             }
         }
-
         public string GetSession(string key)
         {
             try

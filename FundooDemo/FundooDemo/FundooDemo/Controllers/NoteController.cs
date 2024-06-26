@@ -4,8 +4,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using ModelLayer;
+using RepoLayer.Context;
 using RepoLayer.CustomException;
+using RepoLayer.Entity;
+using RepoLayer.Utility;
 
 namespace FundooDemo.Controllers
 {
@@ -15,9 +19,11 @@ namespace FundooDemo.Controllers
     public class NoteController : ControllerBase
     {
         private readonly INoteBL noteBl;
-        public NoteController(INoteBL noteBl)
+        private readonly Caching<NoteEntity> _caching;
+        public NoteController(INoteBL noteBl,ProjectContext projectContext,IDistributedCache cache)
         {
             this.noteBl = noteBl;
+            _caching = new Caching<NoteEntity>(projectContext, cache);
         }
         [HttpPost]
         public IActionResult AddNote(NoteML note)
@@ -25,6 +31,7 @@ namespace FundooDemo.Controllers
             try
             {
                 var result = noteBl.AddNote(note);
+                _caching.Update("AllNotes");
                 return Ok(result);
             }
             catch (CustomException1 ex)
@@ -54,6 +61,7 @@ namespace FundooDemo.Controllers
             try
             {
                 var result = noteBl.RemoveNote(id);
+                _caching.Update("AllNotes");
                 return Ok(result);
             }
             catch (CustomException1 ex)
@@ -82,8 +90,8 @@ namespace FundooDemo.Controllers
         {
             try
             {
-                var result = noteBl.GetAllNotes();
-                return Ok(result);
+                var notes = _caching.GetAll("AllNotes", () => noteBl.GetAllNotes());
+                return Ok(notes);
             }
             catch(CustomException1 ex) 
             {
@@ -111,8 +119,8 @@ namespace FundooDemo.Controllers
         {
             try
             {
-                var result = noteBl.GetNoteById(id);
-                return Ok(result);
+                var note = _caching.GetById($"Note_{id}", () => noteBl.GetNoteById(id));
+                return Ok(note);
             }
             catch (CustomException1 ex)
             {
@@ -141,6 +149,7 @@ namespace FundooDemo.Controllers
             try
             {
                 var result = noteBl.UpdateNote(id, note);
+                _caching.Update("AllNotes");
                 return Ok(result);
             }
             catch (CustomException1 ex)
@@ -170,6 +179,7 @@ namespace FundooDemo.Controllers
             try
             {
                 var result = noteBl.Archive(id);
+                _caching.Update("AllNotes");
                 return Ok(result);
             }
             catch (CustomException1 ex)
@@ -199,6 +209,7 @@ namespace FundooDemo.Controllers
             try
             {
                 var result = noteBl.Trash(id);
+                _caching.Update("AllNotes");
                 return Ok(result);
             }
             catch (CustomException1 ex)
