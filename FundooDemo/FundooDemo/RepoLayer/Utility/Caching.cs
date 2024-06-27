@@ -20,7 +20,7 @@ namespace RepoLayer.Utility
             this.projectContext = projectContext;
             this.cache = cache;
         }
-        public List<T> GetAll(string cacheKey, Func<List<T>> fetchFunc, int cacheDurationInMinutes = 10)
+        public List<T> GetAll<T>(string cacheKey, Func<List<T>> fetchFunc, int cacheDurationInMinutes = 10)
         {
             var cachedData = cache.GetString(cacheKey);
             if (!string.IsNullOrEmpty(cachedData))
@@ -48,7 +48,6 @@ namespace RepoLayer.Utility
             {
                 AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(cacheDurationInMinutes)
             });
-
             return data;
         }
         public void Update(string cacheKey)

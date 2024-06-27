@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "FeSwpnmxQpyMCJpviDPBL8skHXG3CA+SXUaZk0U58P1qcOIfhDRCCsDJMNA5BGJbOaTn9Wrkp4hLmM89IY0BsA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\DELL\\OneDrive - HERE Global B.V\\Desktop\\CDAC\\BridgeLabz_Assignment1\\Fundoo\\FundooDemo\\ConsumerRabbit\\ConsumerRabbit\\ConsumerRabbit.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\DELL\\.nuget\\packages\\rabbitmq.client\\6.8.1\\rabbitmq.client.6.8.1.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
