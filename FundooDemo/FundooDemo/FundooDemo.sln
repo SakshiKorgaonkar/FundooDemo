@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundooDemo", "FundooDemo\FundooDemo.csproj", "{9BDFE519-CEC4-4F25-8184-EE00C1B8BFAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FundooDemo", "FundooDemo\FundooDemo.csproj", "{9BDFE519-CEC4-4F25-8184-EE00C1B8BFAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoLayer", "RepoLayer\RepoLayer.csproj", "{ECB269E5-6FEA-4105-8B0A-3890CE33AF67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepoLayer", "RepoLayer\RepoLayer.csproj", "{ECB269E5-6FEA-4105-8B0A-3890CE33AF67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelLayer", "ModelLayer\ModelLayer.csproj", "{98900C05-36CC-4031-B3FB-A5D8186C93E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelLayer", "ModelLayer\ModelLayer.csproj", "{98900C05-36CC-4031-B3FB-A5D8186C93E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{42DF0C08-A113-4638-A36A-7504A57E6FBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{42DF0C08-A113-4638-A36A-7504A57E6FBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{75740A5A-BC20-4831-996E-86D72B921DE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{42DF0C08-A113-4638-A36A-7504A57E6FBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42DF0C08-A113-4638-A36A-7504A57E6FBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42DF0C08-A113-4638-A36A-7504A57E6FBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75740A5A-BC20-4831-996E-86D72B921DE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75740A5A-BC20-4831-996E-86D72B921DE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75740A5A-BC20-4831-996E-86D72B921DE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75740A5A-BC20-4831-996E-86D72B921DE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

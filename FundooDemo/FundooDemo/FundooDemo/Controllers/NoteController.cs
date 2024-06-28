@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using ModelLayer;
 using RepoLayer.Context;
 using RepoLayer.CustomException;
 using RepoLayer.Entity;
+using RepoLayer.Interface;
 using RepoLayer.Utility;
 
 namespace FundooDemo.Controllers
@@ -20,10 +22,17 @@ namespace FundooDemo.Controllers
     {
         private readonly INoteBL noteBl;
         private readonly Caching<NoteEntity> _caching;
-        public NoteController(INoteBL noteBl,ProjectContext projectContext,IDistributedCache cache)
+        private readonly RabitMQProducer _rabitMQProducer;
+        private readonly ILogger<NoteController> _logger;
+        private readonly ProjectContext projectContext1;
+        public NoteController(INoteBL noteBl,ProjectContext projectContext,IDistributedCache cache,RabitMQProducer rabbitMQProducer,ILogger<NoteController> logger,ProjectContext projectContext1)
         {
+            this._rabitMQProducer = rabbitMQProducer;
             this.noteBl = noteBl;
-            _caching = new Caching<NoteEntity>(projectContext, cache);
+            this._caching = new Caching<NoteEntity>(projectContext, cache);
+            this._logger = logger;
+            _logger.LogDebug("Nlog is integrated to Note Controller");
+            this.projectContext1 = projectContext1;
         }
         [HttpPost]
         public IActionResult AddNote(NoteML note)
@@ -31,6 +40,7 @@ namespace FundooDemo.Controllers
             try
             {
                 var result = noteBl.AddNote(note);
+                _rabitMQProducer.SendProductMessage(result);
                 _caching.Update("AllNotes");
                 return Ok(result);
             }
@@ -42,6 +52,7 @@ namespace FundooDemo.Controllers
                     Message = ex.Message,
                     Data = null
                 };
+                _logger.LogError(ex.Message);
                 return BadRequest(result);
             }
             catch (Exception ex)
@@ -90,10 +101,34 @@ namespace FundooDemo.Controllers
         {
             try
             {
-                var notes = _caching.GetAll("AllNotes", () => noteBl.GetAllNotes());
-                return Ok(notes);
+                var notesWithLabels = _caching.GetAll("allNotesCacheKey", () =>
+                {
+                   return projectContext1.Notes.Include(n => n.LabelNotes)
+                        .ThenInclude(nl => nl.Label)
+                        .Select(n => new
+                        {
+                            n.Id,
+                            n.Title,
+                            n.Description,
+                            n.isTrashed,
+                            n.isArchived,
+                            Labels = n.LabelNotes.Select(nl => new
+                            {
+                                LabelId = nl.Label.Id,
+                                LabelName = nl.Label.Name,
+                            }).ToList()
+                        })
+                        .ToList();
+                });
+
+                if (!notesWithLabels.Any())
+                {
+                    throw new CustomException1("No labels and notes found");
+                }
+
+                return Ok(notesWithLabels);
             }
-            catch(CustomException1 ex) 
+            catch (CustomException1 ex) 
             {
                 var result = new DTO
                 {

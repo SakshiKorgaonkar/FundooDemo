@@ -22,11 +22,13 @@ namespace FundooDemo.Controllers
         private readonly IUserBL userBl;
         private readonly ProjectContext projectContext;
         private readonly TokenGenerator tokenGenerator;
-        public UserController(IUserBL userBl, ProjectContext projectContext, TokenGenerator tokenGenerator)
+        private readonly RabitMQProducer rabitMQProducer;
+        public UserController(IUserBL userBl, ProjectContext projectContext, TokenGenerator tokenGenerator,RabitMQProducer rabitMQProducer)
         {
             this.userBl = userBl;
             this.projectContext = projectContext;
             this.tokenGenerator = tokenGenerator;
+            this.rabitMQProducer = rabitMQProducer;
         }
         [HttpPost("register")]
         public IActionResult RegisterUser(UserML userMl)
@@ -34,6 +36,21 @@ namespace FundooDemo.Controllers
             try
             {
                 var result = userBl.RegisterUser(userMl);
+
+                var email = new MimeMessage();
+                email.From.Add(MailboxAddress.Parse("korgaonkarsakshi23@gmail.com"));
+                email.To.Add(MailboxAddress.Parse(result.Email));
+                email.Subject = "Registration success.";
+                string body = "Registration successfull.";
+
+                email.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = body };
+
+                using var smtp = new SmtpClient();
+                smtp.Connect("smtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
+                smtp.Authenticate("korgaonkarsakshi23@gmail.com", "oakyszygvkzsqevu");
+                smtp.Send(email);
+                smtp.Disconnect(true);
+                rabitMQProducer.SendProductMessage(result);
                 return Ok(result);
             }        
             catch(CustomException1 ex)
