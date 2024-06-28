@@ -23,7 +23,7 @@ namespace FundooDemo.Controllers
         private readonly ProjectContext projectContext;
         private readonly TokenGenerator tokenGenerator;
         private readonly RabitMQProducer rabitMQProducer;
-        public UserController(IUserBL userBl, ProjectContext projectContext, TokenGenerator tokenGenerator,RabitMQProducer rabitMQProducer)
+        public UserController(IUserBL userBl, ProjectContext projectContext, TokenGenerator tokenGenerator, RabitMQProducer rabitMQProducer)
         {
             this.userBl = userBl;
             this.projectContext = projectContext;
@@ -36,11 +36,11 @@ namespace FundooDemo.Controllers
             try
             {
                 var result = userBl.RegisterUser(userMl);
-
                 var email = new MimeMessage();
                 email.From.Add(MailboxAddress.Parse("korgaonkarsakshi23@gmail.com"));
                 email.To.Add(MailboxAddress.Parse(result.Email));
                 email.Subject = "Registration success.";
+
                 string body = "Registration successfull.";
 
                 email.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = body };
