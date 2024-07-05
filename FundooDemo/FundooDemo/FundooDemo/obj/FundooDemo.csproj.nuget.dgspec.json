@@ -122,6 +122,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Confluent.Kafka": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[4.6.0, )"
@@ -135,6 +139,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "Microsoft.Extensions.Options": {
+              "target": "Package",
+              "version": "[8.0.2, )"
             },
             "NLog.Web.AspNetCore": {
               "target": "Package",
@@ -282,6 +290,10 @@
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.0.3, )"
+            },
+            "Confluent.Kafka": {
+              "target": "Package",
+              "version": "[2.4.0, )"
             },
             "MailKit": {
               "target": "Package",

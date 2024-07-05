@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Interface;
 using BusinessLayer.Service;
+using Confluent.Kafka;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using ModelLayer;
+using Newtonsoft.Json;
 using RepoLayer.Context;
 using RepoLayer.CustomException;
 using RepoLayer.Entity;
@@ -20,12 +22,14 @@ namespace FundooDemo.Controllers
     [EnableCors("corspolicy")]
     public class NoteController : ControllerBase
     {
+        private ProducerConfig _configuration;
+        private readonly IConfiguration _config;
         private readonly INoteBL noteBl;
         private readonly Caching<NoteEntity> _caching;
         private readonly RabitMQProducer _rabitMQProducer;
         private readonly ILogger<NoteController> _logger;
         private readonly ProjectContext projectContext1;
-        public NoteController(INoteBL noteBl,ProjectContext projectContext,IDistributedCache cache,RabitMQProducer rabbitMQProducer,ILogger<NoteController> logger,ProjectContext projectContext1)
+        public NoteController(INoteBL noteBl,ProjectContext projectContext,IDistributedCache cache,RabitMQProducer rabbitMQProducer,ILogger<NoteController> logger,ProjectContext projectContext1,ProducerConfig configration,IConfiguration config)
         {
             this._rabitMQProducer = rabbitMQProducer;
             this.noteBl = noteBl;
@@ -33,6 +37,8 @@ namespace FundooDemo.Controllers
             this._logger = logger;
             _logger.LogDebug("Nlog is integrated to Note Controller");
             this.projectContext1 = projectContext1;
+            this._configuration=configration;
+            this._config = config;
         }
         [HttpPost]
         public IActionResult AddNote(NoteML note)
@@ -66,6 +72,19 @@ namespace FundooDemo.Controllers
                 return StatusCode(500, result);
             }
         }
+        //[HttpPost("testKafka")]
+        //public async Task<ActionResult> Get(NoteML noteML)
+        //{
+        //    string serializedData=JsonConvert.SerializeObject(noteML);
+
+        //    var topic = _config.GetSection("TopicName").Value;
+        //    using(var producer=new ProducerBuilder<Null, string>(_configuration).Build())
+        //    {
+        //        await producer.ProduceAsync(topic,new Message<Null, string> { Value=serializedData});
+        //        producer.Flush(TimeSpan.FromSeconds(10));
+        //        return Ok(true);
+        //    }
+        //}
         [HttpDelete]
         public IActionResult RemoveNote(int id)
         {

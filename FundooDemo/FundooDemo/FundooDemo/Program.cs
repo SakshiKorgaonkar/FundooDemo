@@ -10,6 +10,7 @@ using RepoLayer.Utility;
 using System.Text;
 using NLog.Web;
 using NLog;
+using Confluent.Kafka;
 
 var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Debug("init main");
@@ -17,9 +18,15 @@ logger.Debug("init main");
 try
 {
     var builder = WebApplication.CreateBuilder(args);
+    builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+    var producerConfiguration = new ProducerConfig();
+    builder.Configuration.Bind("producerconfiguration", producerConfiguration);
+    builder.Services.AddSingleton(producerConfiguration);   
 
     // NLog: Setup NLog for Dependency injection
     builder.Logging.ClearProviders();
+    builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
     builder.Host.UseNLog();
 
     builder.Services.AddScoped<IUserRL, UserRL>();
@@ -35,6 +42,8 @@ try
     builder.Services.AddScoped<ICollaboratorBL, CollaboratorBL>();
     builder.Services.AddScoped<ICollaboratorRL, CollaboratorRL>();
     builder.Services.AddScoped<RabitMQProducer>();
+    builder.Services.AddScoped<KafkaProducer>();
+    builder.Services.AddScoped<KafkaService>();
     builder.Services.AddControllers();
 
     builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -71,6 +80,7 @@ try
                 policy.WithOrigins("http://example.com", "http://www.contoso.com");
             });
     });
+  
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
@@ -89,6 +99,11 @@ try
     });
     builder.Services.AddHttpContextAccessor();
     var app = builder.Build();
+    using (var scope = app.Services.CreateScope())
+    {
+        var kafkaSetup = scope.ServiceProvider.GetRequiredService<KafkaService>();
+        kafkaSetup.CreateTopicAsync().GetAwaiter().GetResult();
+    }
 
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())

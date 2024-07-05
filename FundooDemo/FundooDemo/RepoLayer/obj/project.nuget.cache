@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "xUz2Yube6amm/yd/Qsejf+1vWZ+gbKu3+u255tiNbF0OavBmJvY8WPAPiOPqpF6AXpeHjUCVn1ZKy9m2HwZswA==",
+  "dgSpecHash": "uTiBjRJ+4tFXk7MkCF+mIAAsPxT8ekr5yx/K88srz7FCjLqsxTFSkqhmQC/MIAyxyYXjyGz20rFugUk6fkV6LA==",
   "success": true,
   "projectFilePath": "C:\\Users\\DELL\\OneDrive - HERE Global B.V\\Desktop\\CDAC\\BridgeLabz_Assignment1\\Fundoo\\FundooDemo\\FundooDemo\\RepoLayer\\RepoLayer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\confluent.kafka\\2.4.0\\confluent.kafka.2.4.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\librdkafka.redist\\2.4.0\\librdkafka.redist.2.4.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\mailkit\\4.6.0\\mailkit.4.6.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.0\\microsoft.aspnetcore.authentication.jwtbearer.6.0.0.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",

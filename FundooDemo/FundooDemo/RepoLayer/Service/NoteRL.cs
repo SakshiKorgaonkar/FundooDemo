@@ -4,6 +4,7 @@ using RepoLayer.Context;
 using RepoLayer.CustomException;
 using RepoLayer.Entity;
 using RepoLayer.Interface;
+using RepoLayer.Utility;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,10 +18,13 @@ namespace RepoLayer.Service
     public class NoteRL : INoteRL
     {
         private readonly ProjectContext projectContext;
+        private readonly KafkaProducer _kafkaProducer;
 
-        public NoteRL(ProjectContext projectContext)
+
+        public NoteRL(ProjectContext projectContext, KafkaProducer kafkaProducer)
         {
             this.projectContext = projectContext;
+            _kafkaProducer = kafkaProducer;
         }
 
         public NoteEntity AddNote(NoteML note)
@@ -30,6 +34,8 @@ namespace RepoLayer.Service
             note1.Description= note.Description;
             projectContext.Notes.Add(note1);
             projectContext.SaveChanges();
+            int partition = note1.Id % 2 == 0 ? 0 : 1;
+            _kafkaProducer.ProduceMessageAsync(note, partition);
             return note1;
         }
 

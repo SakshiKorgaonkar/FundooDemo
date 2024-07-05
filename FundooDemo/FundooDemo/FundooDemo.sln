@@ -11,7 +11,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelLayer", "ModelLayer\Mo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{42DF0C08-A113-4638-A36A-7504A57E6FBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{75740A5A-BC20-4831-996E-86D72B921DE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQConsumer", "RabbitMQConsumer\RabbitMQConsumer.csproj", "{F1CC7B99-D13D-4012-8120-149EC42A82BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaConsumer", "KafkaConsumer\KafkaConsumer.csproj", "{A67DBE0E-0B08-40C6-8CFB-435D11B9E1A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaConsumer1", "KafkaConsumer1\KafkaConsumer1.csproj", "{7BDB961B-C13A-4F11-A22A-0B4AD9C283AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaConsumer2", "KafkaConsumer2.cs\KafkaConsumer2.csproj", "{8ADC69A0-D063-4441-A51B-2790817305B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaConsumer3", "KafkaConsumer3.cs\KafkaConsumer3.csproj", "{2B049DC4-13BC-4E50-AB9F-1AE0F95E1EE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaConsumer4", "KafkaConsumer4.cs\KafkaConsumer4.csproj", "{AD767A7C-3DC9-42EF-9643-C98293187B8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +45,30 @@ Global
 		{42DF0C08-A113-4638-A36A-7504A57E6FBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42DF0C08-A113-4638-A36A-7504A57E6FBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42DF0C08-A113-4638-A36A-7504A57E6FBC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{75740A5A-BC20-4831-996E-86D72B921DE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{75740A5A-BC20-4831-996E-86D72B921DE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{75740A5A-BC20-4831-996E-86D72B921DE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{75740A5A-BC20-4831-996E-86D72B921DE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1CC7B99-D13D-4012-8120-149EC42A82BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1CC7B99-D13D-4012-8120-149EC42A82BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1CC7B99-D13D-4012-8120-149EC42A82BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1CC7B99-D13D-4012-8120-149EC42A82BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A67DBE0E-0B08-40C6-8CFB-435D11B9E1A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A67DBE0E-0B08-40C6-8CFB-435D11B9E1A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A67DBE0E-0B08-40C6-8CFB-435D11B9E1A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A67DBE0E-0B08-40C6-8CFB-435D11B9E1A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BDB961B-C13A-4F11-A22A-0B4AD9C283AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BDB961B-C13A-4F11-A22A-0B4AD9C283AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BDB961B-C13A-4F11-A22A-0B4AD9C283AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BDB961B-C13A-4F11-A22A-0B4AD9C283AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ADC69A0-D063-4441-A51B-2790817305B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ADC69A0-D063-4441-A51B-2790817305B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ADC69A0-D063-4441-A51B-2790817305B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ADC69A0-D063-4441-A51B-2790817305B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B049DC4-13BC-4E50-AB9F-1AE0F95E1EE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B049DC4-13BC-4E50-AB9F-1AE0F95E1EE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B049DC4-13BC-4E50-AB9F-1AE0F95E1EE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B049DC4-13BC-4E50-AB9F-1AE0F95E1EE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD767A7C-3DC9-42EF-9643-C98293187B8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD767A7C-3DC9-42EF-9643-C98293187B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD767A7C-3DC9-42EF-9643-C98293187B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD767A7C-3DC9-42EF-9643-C98293187B8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
