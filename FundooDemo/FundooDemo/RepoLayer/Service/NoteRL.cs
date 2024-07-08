@@ -20,7 +20,6 @@ namespace RepoLayer.Service
         private readonly ProjectContext projectContext;
         private readonly KafkaProducer _kafkaProducer;
 
-
         public NoteRL(ProjectContext projectContext, KafkaProducer kafkaProducer)
         {
             this.projectContext = projectContext;

@@ -20,9 +20,9 @@ internal class Program
         using var consumer = new ConsumerBuilder<Ignore, string>(config).Build();
 
         consumer.Assign(new List<TopicPartitionOffset>
-            {
-                new TopicPartitionOffset(topic, 0, Offset.Beginning) // Partition 0 from the beginning
-            });
+        {
+            new TopicPartitionOffset(topic, 0, Offset.Beginning) // Partition 0 from the beginning
+        });
 
         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
